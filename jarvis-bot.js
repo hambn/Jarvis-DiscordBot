@@ -56,4 +56,51 @@ client.on('message', (message) => {
     });
   }
 
+if (message.content.startsWith(prefix + "img"))
+{
+  // Split message to search image
+  let splitWord = message.toString().split(" ");
+  let searchWrd = "";
+  let googKey   = config.googleKey;
+  let cxKey     = config.cx;
+
+  // Loop through incase of multiple word search
+  for( var i = 1; i < splitWord.length; i++)
+  {
+    if(i > 1)
+    {
+      searchWrd = searchWrd + " ";
+    }
+
+    searchWrd = searchWrd + splitWord[i];
+  }
+
+  let page = 1;
+
+  request("https://www.googleapis.com/customsearch/v1?key=" + googKey + "&cx=" + cxKey + "&q=" + searchWrd + "&searchType=image&alt=json&num=10&start="+page, function(err, res, body) {
+    let data;
+
+    try {
+      data = JSON.parse(body);
+    } catch (error) {
+      console.log(error)
+      return;
+    }
+
+    if(!data){
+      console.log(data);
+      message.channel.sendMessage( "Error:\n" + JSON.stringify(data));
+      return;
+    } else if (!data.items || data.items.length == 0){
+      console.log(data);
+      message.channel.sendMessage( "No result for '" + args + "'");
+      return;
+    }
+    // Get random number
+    let ranNum = Math.floor(Math.random() * data.items.length);
+    let randResult = data.items[ranNum];
+    message.channel.sendMessage( randResult.title + '\n' + randResult.link);
+  });
+}
+
 });
