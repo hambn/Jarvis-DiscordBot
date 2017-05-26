@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const request = require('request');
-
 const client  = new Discord.Client();
 const config  = require('./config.json');
 
@@ -18,7 +17,7 @@ client.on('message', (message) => {
   // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-  if (message.content.startsWith(prefix + "giphy")) 
+  if (message.content.startsWith(prefix + "gif"))
   {
     // Split message to search GIPHY
     let splitWord = message.toString().split(" ");
@@ -35,9 +34,9 @@ client.on('message', (message) => {
       gifWord = gifWord + splitWord[i];
     }
 
-    request("http://api.giphy.com/v1/gifs/search?q=" + gifWord + "&api_key=" + config.giphyKey + "&limit=100", function (error, response, body) 
+    request("http://api.giphy.com/v1/gifs/search?q=" + gifWord + "&api_key=" + config.giphyKey + "&limit=100", function (error, response, body)
     {
-      if (!error && response.statusCode == 200) 
+      if (!error && response.statusCode == 200)
       {
         // Convert body to JSON object
         let jsonUrl = JSON.parse(body);
