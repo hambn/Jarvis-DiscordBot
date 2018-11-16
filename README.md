@@ -6,5 +6,5 @@ This bot uses Google API to do Google image searches and also YouTube searches. 
 
 ## Commands <br>
 1) Giphy search: !gif {search phrase}<br>
-2) Google image searc: !img {search phrase}<br>
+2) Google image search: !img {search phrase}<br>
 3) YouTube search: !youtube {search phrase}<br>
