@@ -14,7 +14,7 @@ client.on('ready', () => {
 client.on('message', (message) => {
 
   // Set the prefix
-  let prefix = '!';
+  let prefix = 'lb';
   // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
