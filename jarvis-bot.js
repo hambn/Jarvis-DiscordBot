@@ -4,7 +4,7 @@ const youtube_node = require('youtube-node');
 const config  = require('./config.json');
 const client  = new Discord.Client();
 
-client.login(config.token);
+client.login(process.env.TOKEN);
 
 // Show message when jarvis comes online
 client.on('ready', () => {
